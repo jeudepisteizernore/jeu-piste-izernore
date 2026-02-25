@@ -112,5 +112,29 @@ function resetGame(){
 }
 </script>
 
+  <script src="game.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const cards = document.querySelectorAll(".baliseCard");
+
+  cards.forEach(card=>{
+    const url = card.getAttribute("href");
+    const match = url.match(/b=(\d+)/);
+    if(!match) return;
+
+    const num = parseInt(match[1],10);
+
+    if(isDone(num)){
+      card.classList.add("done");
+      card.innerHTML += "<div style='margin-top:8px;font-size:12px;color:#f2e3b0;font-weight:900'>✔ Validée</div>";
+    }
+  });
+
+});
+</script>
+
 </body>
 </html>
+
