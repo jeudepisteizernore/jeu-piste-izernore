@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balise</title>
+<link rel="stylesheet" href="style.css">
+<script src="game.js"></script>
+</head>
+
+<body class="romanPage">
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="badge" id="badge">🏛</div>
+      <div>
+        <h1 id="title">Balise</h1>
+        <div class="subtitle" id="subtitle"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="romanFrame" id="card">
+    <div class="romanHeader">
+      <div class="romanTag" id="tagLeft">⚔ Mission</div>
+      <div class="romanTag" id="tagRight">📍 Izernore</div>
+    </div>
+
+    <div class="romanBody">
+      <div class="photoCard" id="photoWrap" style="display:none">
+        <img id="photo" alt="Photo balise">
+      </div>
+
+      <div class="storyCard" id="story"></div>
+
+      <div class="storyCard" style="margin-top:12px" id="questionTitle"></div>
+
+      <!-- ZONE JEU -->
+      <div id="gameZone"></div>
+
+      <div class="actionsRow">
+        <div class="btnGhost" id="btnInfo">📖 Infos Izernore</div>
+        <div class="btnGhost" id="btnHint">💡 Indice</div>
+        <a class="btnGhost" href="index.html" onclick="play('click')">🏛️ Retour au Forum</a>
+      </div>
+
+      <div class="resultBox">
+        <div id="res" style="font-weight:900"></div>
+        <div class="smallPro" id="hintsBox" style="margin-top:8px"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODALE INFOS -->
+<div class="modalBg" id="infoBg" onclick="closeInfo()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modalTop">
+      <div class="romanTag" id="infoTitle">📖 Infos Izernore</div>
+      <button class="modalClose" onclick="closeInfo()">✕ Fermer</button>
+    </div>
+    <div class="modalBody" id="infoBody"></div>
+  </div>
+</div>
+
+<script>
+// ---------------- CONFIG DES BALISES ----------------
+// NOTE : pas de mot final affiché ici. La validation finale le gère en secret.
+const BALISES = {
+  1: {
+    icon:"🦉",
+    title:"Balise I — Avant Rome",
+    subtitle:"Avant la conquête : les Séquanes",
+    photo:"images/b1.jpg",
+    story:"Un ancien raconte : « Ici, avant Rome, des Gaulois vivaient déjà. Prouve que tu sais qui contrôlait la zone. »",
+    q:"Question : Isarnodurum se trouvait au sud du territoire…",
+    type:"mcq",
+    choices:[
+      ["a","des Séquanes"],
+      ["b","des Vikings"],
+      ["c","des Pharaons"]
+    ],
+    answer:"a",
+    reward:"IS",
+    hints:[
+      "C’est un peuple gaulois lié à la Franche-Comté actuelle.",
+      "Ce ne sont pas des peuples d’autres époques.",
+      "Indice : S…"
+    ],
+    infoTitle:"Infos Izernore — Avant Rome",
+    infoBody:`
+      <p>Izernore existait <b>avant la conquête romaine</b>. On a retrouvé des <b>céramiques</b>, des <b>monnaies</b> et des <b>fibules</b> datées des IIᵉ et Iᵉʳ siècles av. J.-C.</p>
+      <p>À cette période, le site se trouvait au sud du territoire des <b>Séquanes</b>, un peuple gaulois présent dans la région.</p>
+    `
+  },
+
+  2: {
+    icon:"🏛",
+    title:"Balise II — Le Vicus",
+    subtitle:"Comprendre la bourgade gallo-romaine",
+    photo:"images/b2.jpg",
+    story:"Le scribe du village a mélangé une phrase. Remets-la dans le bon ordre pour gagner ta lettre.",
+    q:"Épreuve : remets la phrase dans l’ordre",
+    type:"order",
+    parts:[
+      "Le vicus",
+      "était une bourgade",
+      "avec des maisons et des boutiques",
+      "le long d’une voie."
+    ],
+    answerOrder:[0,1,2,3],
+    reward:"A",
+    hints:[
+      "Commence par le sujet (de quoi on parle).",
+      "Ensuite : définition, puis détails.",
+      "La fin parle de l’endroit : « le long d’une voie »."
+    ],
+    infoTitle:"Infos Izernore — Le Vicus",
+    infoBody:`
+      <p>Après la conquête romaine, le site se développe et devient un <b>vicus</b> : une bourgade rurale de taille moyenne.</p>
+      <p>Le cœur du vicus : <b>maisons + boutiques</b> réparties de part et d’autre d’une <b>voie de circulation</b>, preuve d’une vraie activité commerciale et artisanale.</p>
+    `
+  },
+
+  3: {
+    icon:"🔥",
+    title:"Balise III — Les Thermes",
+    subtitle:"Chaud / tiède / froid",
+    photo:"images/b3.jpg",
+    story:"Dans les thermes, on ne commence pas n’importe comment. Associe chaque salle à la bonne température.",
+    q:"Associe correctement :",
+    type:"match",
+    pairs:[
+      ["Caldarium", ["chaud","tiède","froid"], "chaud"],
+      ["Tepidarium", ["chaud","tiède","froid"], "tiède"],
+      ["Frigidarium", ["chaud","tiède","froid"], "froid"]
+    ],
+    reward:"R",
+    hints:[
+      "Calda… ça sonne comme chaud.",
+      "Tepi… c’est entre les deux.",
+      "Frigi… c’est froid."
+    ],
+    infoTitle:"Infos Izernore — Les Thermes",
+    infoBody:`
+      <p>Des fouilles ont permis d’identifier des <b>thermes</b> : plusieurs salles, parfois chauffées par <b>hypocauste</b> (chaleur sous le sol).</p>
+      <p>Les Romains alternaient des pièces <b>chaudes</b>, <b>tièdes</b> et <b>froides</b> pour se laver et se détendre.</p>
+    `
+  },
+
+  4: {
+    icon:"🧱",
+    title:"Balise IV — Hypocauste",
+    subtitle:"Le chauffage par le sol",
+    photo:"images/b4.jpg",
+    story:"Le gardien te teste : « Si tu comprends comment les Romains chauffaient, tu passes. »",
+    q:"Question : l’hypocauste chauffe surtout…",
+    type:"mcq",
+    choices:[
+      ["a","Par le sol : l’air chaud circule dessous et réchauffe les dalles"],
+      ["b","Par des ventilateurs électriques"],
+      ["c","Avec de la glace sous les dalles"]
+    ],
+    answer:"a",
+    reward:"N",
+    hints:[
+      "HYPO = dessous.",
+      "C’est un chauffage romain, pas moderne.",
+      "La chaleur circule sous le sol."
+    ],
+    infoTitle:"Infos Izernore — Hypocauste",
+    infoBody:`
+      <p>Dans les thermes, certaines salles étaient chauffées par <b>hypocauste</b> : un système où la chaleur passe <b>sous le sol</b> (et parfois dans les murs).</p>
+      <p>Le but : réchauffer les pièces chaudes/tièdes pour le confort.</p>
+    `
+  },
+
+  5: { icon:"🛍", title:"Balise V — Le Marché", subtitle:"Boutiques & artisans", photo:"images/b5.jpg",
+    story:"Un marchand te parle : « Ici, ça vend et ça fabrique. » Prouve que tu as compris.",
+    q:"Question : maisons + boutiques le long d’une voie = village…",
+    type:"mcq",
+    choices:[["a","vivant, avec commerce et artisanat"],["b","vide, sans activité"],["c","uniquement des châteaux"]],
+    answer:"a", reward:"O",
+    hints:["Marché = ça bouge.","Boutiques = commerce.","Artisans = fabrication."],
+    infoTitle:"Infos Izernore — Commerce",
+    infoBody:`<p>Les fouilles ont montré une vraie animation : <b>maisons et boutiques</b> le long d’une voie, avec des activités <b>commerciales</b> et <b>artisanales</b>.</p>`
+  },
+
+  6: { icon:"🏺", title:"Balise VI — La Villa", subtitle:"Pérignat : haut niveau de vie", photo:"images/b6.jpg",
+    story:"Dans une villa riche, il y a des signes de luxe. Coche les 2 bons.",
+    q:"Coche exactement 2 éléments :",
+    type:"multi",
+    checks:[
+      ["a","Peintures murales (techniques importées d’Italie)"],
+      ["b","Galerie à l’étage avec colonnes"],
+      ["c","Garage à dragons"],
+      ["d","Console romaine"]
+    ],
+    answerSet:["a","b"], reward:"D",
+    hints:["Luxe = art + architecture.","Italie = technique importée.","Colonnes = prestige."],
+    infoTitle:"Infos Izernore — Villa de Pérignat",
+    infoBody:`<p>La villa découverte à Pérignat montre un <b>haut niveau de vie</b> : peintures murales, galerie à colonnes, vue sur la vallée.</p>`
+  },
+
+  7: { icon:"🏛", title:"Balise VII — Le Temple", subtitle:"Chiffres du monument", photo:"images/b7.jpg",
+    story:"Le temple impressionne encore aujourd’hui. Retrouve les bons chiffres.",
+    q:"Choisis les 2 bonnes valeurs :",
+    type:"select2",
+    selectA:{label:"Hauteur des piliers conservés (env.)", options:["3 m","9 m","30 m"], answer:"9 m"},
+    selectB:{label:"Nombre de colonnes estimé", options:["12","26","100"], answer:"26"},
+    reward:"O",
+    hints:["Les piliers visibles sont très hauts.","Ce n’est pas 3 m.","Colonnes estimées : 26."],
+    infoTitle:"Infos Izernore — Temple",
+    infoBody:`<p>Le temple est un site antique majeur. Trois piliers d’angle sont conservés sur <b>environ 9 m</b>. Le temple aurait eu environ <b>26 colonnes</b>.</p>`
+  },
+
+  8: { icon:"⚔", title:"Balise VIII — Mars ou Mercure ?", subtitle:"Le dieu du temple", photo:"images/b8.jpg",
+    story:"On ne sait pas à 100% quel dieu était honoré. Mais un indice local existe…",
+    q:"Le chemin « vi de mars » fait penser plutôt à…",
+    type:"mcq",
+    choices:[["a","Mars (guerre)"],["b","Mercure (commerce)"],["c","Neptune (mer)"]],
+    answer:"a", reward:"R",
+    hints:["Le nom du chemin contient un nom.","Lis-le : c’est direct.","« mars » → Mars."],
+    infoTitle:"Infos Izernore — Dieu honoré",
+    infoBody:`<p>Le monument n’a pas livré tous ses secrets. Une inscription évoque Mercure, mais un chemin voisin appelé <b>« vi de mars »</b> a conduit certains à penser à <b>Mars</b>.</p>`
+  },
+
+  9: { icon:"🪨", title:"Balise IX — Chemin des Pierres", subtitle:"Associer pierres et lieux", photo:"images/b9.jpg",
+    story:"Les pierres du village racontent une histoire. Fais les bonnes associations.",
+    q:"Associe correctement :",
+    type:"matchSimple",
+    items:[
+      ["Pierre mouillée", ["Lavoir","Église","Temple"], "Lavoir"],
+      ["Pierre sacrée", ["Église","Lavoir","Temple"], "Église"],
+      ["Pierre ruinée", ["Temple","Croix","Lavoir"], "Temple"]
+    ],
+    reward:"U",
+    hints:["Mouillée = eau.","Sacrée = église.","Ruinée = temple antique."],
+    infoTitle:"Infos Izernore — Chemin des Pierres",
+    infoBody:`<p>Un parcours libre avec des panneaux : pierre sacrée (église), pierre mouillée (lavoir), pierre ruinée (temple), etc. Idéal pour comprendre l’évolution du village.</p>`
+  },
+
+  10: { icon:"👑", title:"Balise X — L’Empereur", subtitle:"Dernière lettre", photo:"images/b10.jpg",
+    story:"Dernier test. L’empereur ne pardonne pas l’erreur.",
+    q:"Quel monument est protégé (monument historique) depuis 1840 ?",
+    type:"mcq",
+    choices:[["a","Le temple gallo-romain"],["b","La mairie"],["c","Le stade"]],
+    answer:"a", reward:"M",
+    hints:["Vestige antique encore debout.","Piliers visibles.","Site le plus célèbre du village."],
+    infoTitle:"Infos Izernore — Monument 1840",
+    infoBody:`<p>Les vestiges du temple font partie de la <b>première liste (1840)</b> des monuments historiques protégés en France.</p>`
+  },
+
+  11: { icon:"🏁", title:"Balise XI — Validation finale", subtitle:"Entre le mot secret", photo:"images/b11.jpg",
+    story:"Tu as récupéré toutes les lettres. Assemble-les et entre le mot secret ici.",
+    q:"Écris le mot secret (MAJUSCULES, sans espace) :",
+    type:"final",
+    reward:"",
+    hints:["Vérifie l’ordre des lettres.","La balise 1 donne 2 lettres.","Tu dois avoir 11 lettres au total."],
+    infoTitle:"Infos Izernore — Fin",
+    infoBody:`<p>Bravo d’être allé jusqu’au bout. La dernière étape sert juste à <b>valider</b> le mot secret.</p>`
+  },
+};
+
+// ---------------- RENDER ----------------
+const params = new URLSearchParams(location.search);
+const b = parseInt(params.get("b") || "1", 10);
+const data = BALISES[b];
+
+if(!data){
+  document.body.innerHTML = "<div style='padding:20px;color:#fff'>Balise introuvable.</div>";
+} else {
+  document.title = data.title;
+
+  $("badge").textContent = data.icon || "🏛";
+  $("title").textContent = data.title;
+  $("subtitle").textContent = data.subtitle || "";
+  $("story").innerHTML = data.story;
+  $("questionTitle").innerHTML = "<b>" + (data.q || "") + "</b>";
+
+  // Photo
+  if(data.photo){
+    $("photoWrap").style.display = "block";
+    $("photo").src = data.photo;
+  }
+
+  // Infos
+  $("infoTitle").textContent = "📖 " + (data.infoTitle || "Infos Izernore");
+  $("infoBody").innerHTML = data.infoBody || "<p>Infos à venir.</p>";
+
+  $("btnInfo").onclick = () => { play("click"); openInfo(); };
+
+  // Indices progressifs
+  let hintLevel = 0;
+  $("btnHint").onclick = () => {
+    play("click");
+    hintLevel = Math.min(hintLevel+1, (data.hints||[]).length);
+    $("hintsBox").innerHTML = (data.hints||[]).slice(0,hintLevel).map(h => "• " + h).join("<br>");
+  };
+
+  // Jeu
+  renderGame(data);
+}
+
+function openInfo(){ $("infoBg").style.display="flex"; }
+function closeInfo(){ $("infoBg").style.display="none"; }
+
+function win(reward){
+  const card = $("card");
+  setDone(b);
+  play("ok"); glow(card);
+  if(reward){
+    $("res").innerHTML = "✅ Bravo ! Récompense : <span class='letter'>" + reward + "</span>";
+  }else{
+    $("res").textContent = "✅ Bravo !";
+  }
+}
+function fail(msg){
+  const card = $("card");
+  play("bad"); shake(card);
+  $("res").textContent = msg || "❌ Mauvaise réponse. Réessaie.";
+}
+
+// ---------- render types ----------
+function renderGame(d){
+  const z = $("gameZone");
+  z.innerHTML = "";
+
+  if(d.type==="mcq"){
+    d.choices.forEach(([id,label])=>{
+      const btn = document.createElement("button");
+      btn.className = "choiceBtn";
+      btn.textContent = label;
+      btn.onclick = ()=>{
+        play("click");
+        if(id===d.answer) win(d.reward);
+        else fail("❌ Non. Relis « Infos Izernore » puis réessaie.");
+      };
+      z.appendChild(btn);
+    });
+  }
+
+  if(d.type==="multi"){
+    // checkboxes + validate button
+    const wrap = document.createElement("div");
+    const ids = [];
+    d.checks.forEach(([id,label])=>{
+      ids.push(id);
+      const row = document.createElement("div");
+      row.className = "storyCard";
+      row.style.marginTop = "10px";
+      row.innerHTML = `<label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer">
+        <input type="checkbox" id="ck_${id}" style="margin-top:3px;transform:scale(1.15)">
+        <div>${label}</div>
+      </label>`;
+      wrap.appendChild(row);
+    });
+    const v = document.createElement("div");
+    v.className = "btnGhost";
+    v.style.display = "inline-flex";
+    v.style.marginTop = "12px";
+    v.textContent = "✅ Valider";
+    v.onclick = ()=>{
+      play("click");
+      const chosen = ids.filter(id => document.getElementById("ck_"+id).checked);
+      const ok = chosen.length===d.answerSet.length && chosen.every(x=>d.answerSet.includes(x));
+      if(ok) win(d.reward);
+      else fail("❌ Non. Il y a exactement " + d.answerSet.length + " bonnes réponses.");
+    };
+    wrap.appendChild(v);
+    z.appendChild(wrap);
+  }
+
+  if(d.type==="order"){
+    // click to build order
+    const pool = d.parts.map((t,idx)=>({t,idx,used:false}));
+    const selected = [];
+    const box = document.createElement("div");
+    box.className = "storyCard";
+    box.innerHTML = `<div class="smallPro">Clique les morceaux dans l’ordre :</div>
+                     <div id="orderLine" style="margin-top:10px;font-weight:900"></div>`;
+    z.appendChild(box);
+
+    const buttons = document.createElement("div");
+    d.parts.forEach((t,idx)=>{
+      const btn = document.createElement("button");
+      btn.className="choiceBtn";
+      btn.textContent = t;
+      btn.onclick=()=>{
+        play("click");
+        if(selected.includes(idx)) return;
+        selected.push(idx);
+        document.getElementById("orderLine").textContent = selected.map(i=>d.parts[i]).join(" ");
+        btn.style.opacity = "0.45";
+        if(selected.length===d.answerOrder.length){
+          const ok = selected.every((v,i)=>v===d.answerOrder[i]);
+          if(ok) win(d.reward);
+          else{
+            fail("❌ Pas dans le bon ordre. Réessaie.");
+            // reset
+            selected.length=0;
+            document.getElementById("orderLine").textContent="";
+            [...buttons.querySelectorAll("button")].forEach(b=>b.style.opacity="1");
+          }
+        }
+      };
+      buttons.appendChild(btn);
+    });
+    z.appendChild(buttons);
+  }
+
+  if(d.type==="match" || d.type==="matchSimple"){
+    const wrap = document.createElement("div");
+    d.pairs = d.pairs || d.items; // unify
+    d.pairs.forEach(([label, options, ans], i)=>{
+      const card = document.createElement("div");
+      card.className="storyCard";
+      card.style.marginTop="10px";
+      const selId = "sel_"+i;
+      card.innerHTML = `
+        <div style="font-weight:900;margin-bottom:8px">${label}</div>
+        <select id="${selId}">
+          <option value="">Choisir…</option>
+          ${options.map(o=>`<option value="${o}">${o}</option>`).join("")}
+        </select>`;
+      wrap.appendChild(card);
+    });
+
+    const v = document.createElement("div");
+    v.className="btnGhost";
+    v.style.display="inline-flex";
+    v.style.marginTop="12px";
+    v.textContent="✅ Valider";
+    v.onclick=()=>{
+      play("click");
+      const ok = d.pairs.every(([label, options, ans], i)=>{
+        return document.getElementById("sel_"+i).value === ans;
+      });
+      if(ok) win(d.reward);
+      else fail("❌ Pas encore. Vérifie chaque association.");
+    };
+    wrap.appendChild(v);
+    z.appendChild(wrap);
+  }
+
+  if(d.type==="select2"){
+    const wrap = document.createElement("div");
+    const a = document.createElement("div");
+    a.className="storyCard";
+    a.innerHTML = `<div class="smallPro" style="margin-bottom:6px">${d.selectA.label}</div>
+      <select id="sa"><option value="">Choisir…</option>${d.selectA.options.map(o=>`<option value="${o}">${o}</option>`).join("")}</select>`;
+    const b = document.createElement("div");
+    b.className="storyCard";
+    b.style.marginTop="10px";
+    b.innerHTML = `<div class="smallPro" style="margin-bottom:6px">${d.selectB.label}</div>
+      <select id="sb"><option value="">Choisir…</option>${d.selectB.options.map(o=>`<option value="${o}">${o}</option>`).join("")}</select>`;
+    wrap.appendChild(a); wrap.appendChild(b);
+
+    const v = document.createElement("div");
+    v.className="btnGhost";
+    v.style.display="inline-flex";
+    v.style.marginTop="12px";
+    v.textContent="✅ Valider";
+    v.onclick=()=>{
+      play("click");
+      if($("sa").value===d.selectA.answer && $("sb").value===d.selectB.answer) win(d.reward);
+      else fail("❌ Pas encore. Revois les infos du temple.");
+    };
+    wrap.appendChild(v);
+    z.appendChild(wrap);
+  }
+
+  if(d.type==="final"){
+    const wrap = document.createElement("div");
+    const input = document.createElement("input");
+    input.placeholder = "MOT SECRET…";
+    input.style.textTransform="uppercase";
+    input.id="finalInput";
+    wrap.appendChild(input);
+
+    const btn = document.createElement("div");
+    btn.className="btnGhost";
+    btn.style.display="inline-flex";
+    btn.style.marginTop="12px";
+    btn.textContent="✅ Valider";
+    btn.onclick=()=>{
+      play("click");
+      const v = (input.value||"").toUpperCase().replace(/\s+/g,"").replace(/[^A-Z]/g,"");
+      const secret = "ISARNODORUM"; // jamais affiché dans l’UI
+      if(v===secret){
+        setDone(11);
+        play("ok"); glow($("card"));
+        $("res").textContent="🏛️🎉 BRAVO ! Mission réussie.";
+      }else{
+        fail("❌ Ce n’est pas le bon mot. Vérifie tes lettres et l’ordre.");
+      }
+    };
+    wrap.appendChild(btn);
+    $("gameZone").appendChild(wrap);
+  }
+}
+</script>
+</body>
+</html>
