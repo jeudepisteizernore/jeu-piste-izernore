@@ -144,7 +144,61 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 
+  <script src="game.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const totalBalises = 11;
+  let doneCount = 0;
+
+  const cards = document.querySelectorAll(".baliseCard");
+
+  cards.forEach(card=>{
+    const url = card.getAttribute("href");
+    const match = url.match(/b=(\d+)/);
+    if(!match) return;
+
+    const num = parseInt(match[1],10);
+
+    if(isDone(num)){
+      card.classList.add("done");
+      doneCount++;
+    }
+  });
+
+  /* ===== PROGRESSION ===== */
+  const percent = Math.round((doneCount / totalBalises) * 100);
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("progressText").textContent = percent + "%";
+
+  /* ===== VERROUILLAGE ORDRE ===== */
+  let maxUnlocked = doneCount + 1;
+
+  cards.forEach(card=>{
+    const url = card.getAttribute("href");
+    const match = url.match(/b=(\d+)/);
+    if(!match) return;
+    const num = parseInt(match[1],10);
+
+    if(num > maxUnlocked){
+      card.classList.add("locked");
+    }
+  });
+
+  /* ===== BADGE FINAL ===== */
+  if(doneCount === totalBalises){
+    const badge = document.createElement("div");
+    badge.className = "finalBadge";
+    badge.innerHTML = "🎖 Explorateur Romain — Mission accomplie !";
+    document.querySelector(".wrap").appendChild(badge);
+  }
+
+});
+</script>
+
 </body>
 </html>
+
 
 
