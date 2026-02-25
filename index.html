@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Le Code de l’Empire — Jeu de piste</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body class="romanPage">
@@ -26,8 +24,6 @@
     </div>
   </div>
 
-
-  <!-- MISSION CARD -->
   <div class="romanFrame">
 
     <div class="romanHeader">
@@ -36,6 +32,15 @@
     </div>
 
     <div class="romanBody">
+
+      <!-- PROGRESSION -->
+      <div class="storyCard" style="margin-bottom:18px">
+        🏆 Progression : 
+        <b><span id="progressText">0 / 11</span></b>
+        <div style="margin-top:10px;height:10px;background:rgba(0,0,0,.3);border-radius:20px;overflow:hidden">
+          <div id="progressBar" style="height:100%;width:0%;background:linear-gradient(90deg,gold,orange)"></div>
+        </div>
+      </div>
 
       <div class="storyCard">
         À chaque balise, réussis l’épreuve et récupère une lettre.
@@ -49,39 +54,63 @@
       <!-- GRID BALISES -->
       <div class="baliseGrid">
 
-        <div class="baliseGrid">
+        <a href="balise.html?b=1" class="baliseCard" data-id="1"><div class="baliseIcon">🦉</div><div class="baliseTitle">Balise I — Avant Rome</div><div class="baliseDesc">Les Séquanes & la Gaule</div></a>
 
-  <a href="balise.html?b=1" class="baliseCard"><div class="baliseIcon">🦉</div><div class="baliseTitle">Balise I — Avant Rome</div><div class="baliseDesc">Les Séquanes & la Gaule</div></a>
+        <a href="balise.html?b=2" class="baliseCard" data-id="2"><div class="baliseIcon">🏛</div><div class="baliseTitle">Balise II — Le Vicus</div><div class="baliseDesc">Vie dans la bourgade</div></a>
 
-  <a href="balise.html?b=2" class="baliseCard"><div class="baliseIcon">🏛</div><div class="baliseTitle">Balise II — Le Vicus</div><div class="baliseDesc">Vie dans la bourgade</div></a>
+        <a href="balise.html?b=3" class="baliseCard" data-id="3"><div class="baliseIcon">🔥</div><div class="baliseTitle">Balise III — Les Thermes</div><div class="baliseDesc">Chaud / tiède / froid</div></a>
 
-  <a href="balise.html?b=3" class="baliseCard"><div class="baliseIcon">🔥</div><div class="baliseTitle">Balise III — Les Thermes</div><div class="baliseDesc">Chaud / tiède / froid</div></a>
+        <a href="balise.html?b=4" class="baliseCard" data-id="4"><div class="baliseIcon">🧱</div><div class="baliseTitle">Balise IV — Hypocauste</div><div class="baliseDesc">Chauffage romain</div></a>
 
-  <a href="balise.html?b=4" class="baliseCard"><div class="baliseIcon">🧱</div><div class="baliseTitle">Balise IV — Hypocauste</div><div class="baliseDesc">Chauffage romain</div></a>
+        <a href="balise.html?b=5" class="baliseCard" data-id="5"><div class="baliseIcon">🛍</div><div class="baliseTitle">Balise V — Le Marché</div><div class="baliseDesc">Boutiques & artisanat</div></a>
 
-  <a href="balise.html?b=5" class="baliseCard"><div class="baliseIcon">🛍</div><div class="baliseTitle">Balise V — Le Marché</div><div class="baliseDesc">Boutiques & artisanat</div></a>
+        <a href="balise.html?b=6" class="baliseCard" data-id="6"><div class="baliseIcon">🏺</div><div class="baliseTitle">Balise VI — La Villa</div><div class="baliseDesc">Pérignat : haut niveau de vie</div></a>
 
-  <a href="balise.html?b=6" class="baliseCard"><div class="baliseIcon">🏺</div><div class="baliseTitle">Balise VI — La Villa</div><div class="baliseDesc">Pérignat : haut niveau de vie</div></a>
+        <a href="balise.html?b=7" class="baliseCard" data-id="7"><div class="baliseIcon">🏛</div><div class="baliseTitle">Balise VII — Le Temple</div><div class="baliseDesc">Colonnes & mystère</div></a>
 
-  <a href="balise.html?b=7" class="baliseCard"><div class="baliseIcon">🏛</div><div class="baliseTitle">Balise VII — Le Temple</div><div class="baliseDesc">Colonnes & mystère</div></a>
+        <a href="balise.html?b=8" class="baliseCard" data-id="8"><div class="baliseIcon">⚔</div><div class="baliseTitle">Balise VIII — Mars ou Mercure ?</div><div class="baliseDesc">Le dieu honoré</div></a>
 
-  <a href="balise.html?b=8" class="baliseCard"><div class="baliseIcon">⚔</div><div class="baliseTitle">Balise VIII — Mars ou Mercure ?</div><div class="baliseDesc">Le dieu honoré</div></a>
+        <a href="balise.html?b=9" class="baliseCard" data-id="9"><div class="baliseIcon">🪨</div><div class="baliseTitle">Balise IX — Chemin des Pierres</div><div class="baliseDesc">Associer pierres & lieux</div></a>
 
-  <a href="balise.html?b=9" class="baliseCard"><div class="baliseIcon">🪨</div><div class="baliseTitle">Balise IX — Chemin des Pierres</div><div class="baliseDesc">Associer pierres & lieux</div></a>
+        <a href="balise.html?b=10" class="baliseCard" data-id="10"><div class="baliseIcon">👑</div><div class="baliseTitle">Balise X — L’Empereur</div><div class="baliseDesc">Dernière lettre</div></a>
 
-  <a href="balise.html?b=10" class="baliseCard"><div class="baliseIcon">👑</div><div class="baliseTitle">Balise X — L’Empereur</div><div class="baliseDesc">Dernière lettre</div></a>
+        <a href="balise.html?b=11" class="baliseCard" data-id="11"><div class="baliseIcon">🏁</div><div class="baliseTitle">Balise XI — Validation finale</div><div class="baliseDesc">Entrer le mot secret</div></a>
 
-  <a href="balise.html?b=11" class="baliseCard"><div class="baliseIcon">🏁</div><div class="baliseTitle">Balise XI — Validation finale</div><div class="baliseDesc">Entrer le mot secret</div></a>
+      </div>
 
-</div>
-        </a>
-
+      <div style="margin-top:25px;text-align:center">
+        <div class="btnGhost" onclick="resetGame()">🔄 Réinitialiser le jeu</div>
       </div>
 
     </div>
   </div>
-
 </div>
+
+<script>
+// ---- PROGRESSION ----
+const done = JSON.parse(localStorage.getItem("doneBalises") || "[]");
+const total = 11;
+
+document.getElementById("progressText").textContent = done.length + " / " + total;
+document.getElementById("progressBar").style.width = (done.length/total*100) + "%";
+
+// ---- BALISES VALIDÉES EN DORÉ ----
+document.querySelectorAll(".baliseCard").forEach(card=>{
+  const id = parseInt(card.dataset.id);
+  if(done.includes(id)){
+    card.style.border="2px solid gold";
+    card.style.boxShadow="0 0 20px rgba(212,180,106,.7)";
+  }
+});
+
+// ---- RESET ----
+function resetGame(){
+  if(confirm("Réinitialiser toute la progression ?")){
+    localStorage.removeItem("doneBalises");
+    location.reload();
+  }
+}
+</script>
 
 </body>
 </html>
