@@ -408,3 +408,59 @@ select:focus{ border-color: rgba(242,227,176,.34); }
   filter: drop-shadow(0 0 8px rgba(212,180,106,.9));
 }
 
+/* ===== PROGRESSION BAR ===== */
+.progressWrap{
+  margin:20px 0 10px 0;
+}
+
+.progressBar{
+  height:14px;
+  border-radius:999px;
+  background: rgba(0,0,0,.35);
+  border:1px solid rgba(242,227,176,.2);
+  overflow:hidden;
+}
+
+.progressFill{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,#d4b46a,#f2e3b0);
+  box-shadow: 0 0 15px rgba(212,180,106,.6);
+  transition: width .6s ease;
+}
+
+/* ===== BALISE DONE ===== */
+.baliseCard.done{
+  border:2px solid #d4b46a;
+  background: linear-gradient(180deg, rgba(212,180,106,.25), rgba(0,0,0,.45));
+  box-shadow: 0 0 20px rgba(212,180,106,.5);
+}
+
+.baliseCard.done::after{
+  content:"🏆";
+  position:absolute;
+  top:10px;
+  right:14px;
+  font-size:18px;
+}
+
+/* ===== BALISE LOCKED ===== */
+.baliseCard.locked{
+  opacity:.45;
+  pointer-events:none;
+  filter: grayscale(.6);
+}
+
+/* ===== BADGE FINAL ===== */
+.finalBadge{
+  margin-top:20px;
+  padding:18px;
+  text-align:center;
+  border-radius:18px;
+  background: linear-gradient(180deg, rgba(212,180,106,.25), rgba(0,0,0,.6));
+  border:2px solid #d4b46a;
+  font-weight:900;
+  font-size:20px;
+  box-shadow:0 0 30px rgba(212,180,106,.6);
+}
+
