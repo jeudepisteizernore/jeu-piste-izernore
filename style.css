@@ -1,20 +1,22 @@
 /* =========================================================
-   LUD'IZ — Jeu de piste romain (Netlify)
-   style.css (COMPLET) — thème parchemin + motifs + UI pro
-   Dépendances fichiers :
+   LUD'IZ — Jeu de piste romain
+   style.css (COMPLET) — thème parchemin + frises + UI pro
+   Dépendances :
    - images/bg-parchment.jpg
    - images/motif-grec.png
    ========================================================= */
 
 /* ---------- Reset & base ---------- */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.35;
-  color: rgba(245, 241, 230, 0.95);
+  line-height:1.35;
+  color: rgba(245,241,230,.95);
 }
+img{ max-width:100%; display:block; }
+a{ color: inherit; }
 
 /* ---------- Variables ---------- */
 :root{
@@ -33,6 +35,8 @@ body {
 
   --radius: 18px;
   --radius2: 20px;
+
+  --shadow: 0 24px 70px rgba(0,0,0,.55);
 }
 
 /* ---------- Layout wrappers ---------- */
@@ -42,65 +46,61 @@ body {
 }
 
 /* ---------- Top header ---------- */
-.topbar{
-  margin-bottom: 14px;
-}
+.topbar{ margin-bottom:14px; }
 .brand{
   display:flex;
   align-items:center;
   gap:14px;
 }
 .badge{
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
+  width:52px;
+  height:52px;
+  border-radius:16px;
   display:grid;
   place-items:center;
   background: rgba(0,0,0,.28);
-  border: 1px solid var(--line);
+  border:1px solid var(--line);
   color: var(--gold);
-  font-size: 22px;
+  font-size:22px;
 }
 h1{
-  margin: 0;
-  letter-spacing: 0.5px;
-  font-size: 34px;
-  line-height: 1.05;
+  margin:0;
+  letter-spacing:.5px;
+  font-size:34px;
+  line-height:1.05;
 }
 .subtitle{
-  margin-top: 6px;
+  margin-top:6px;
   color: var(--muted);
-  font-size: 14px;
+  font-size:14px;
 }
 
 /* =========================================================
    THEME ROMAIN PRO (parchemin + frises)
-   Applique en mettant : <body class="romanPage">
+   Applique : <body class="romanPage">
    ========================================================= */
-.romanPage{
-  position: relative;
-}
+.romanPage{ position:relative; }
 
-/* Fond parchemin (image réelle) + lumière + vignette */
+/* Fond parchemin + lumière */
 .romanPage::before{
   content:"";
-  position: fixed;
-  inset: 0;
+  position:fixed;
+  inset:0;
   background:
     radial-gradient(1000px 620px at 15% 0%, rgba(212,180,106,.16), transparent 60%),
     radial-gradient(900px 520px at 85% 20%, rgba(139,29,29,.12), transparent 60%),
     url("images/bg-parchment.jpg");
-  background-size: cover;
-  background-position: center;
-  filter: saturate(1.06) contrast(1.05);
-  z-index: -2;
+  background-size:cover;
+  background-position:center;
+  filter:saturate(1.06) contrast(1.05);
+  z-index:-2;
 }
 .romanPage::after{
   content:"";
-  position: fixed;
-  inset: 0;
+  position:fixed;
+  inset:0;
   background: rgba(0,0,0,.58);
-  z-index: -1;
+  z-index:-1;
 }
 
 /* =========================================================
@@ -110,26 +110,26 @@ h1{
 /* Frame principal */
 .romanFrame{
   border-radius: var(--radius2);
-  overflow: hidden;
-  border: 1px solid rgba(242,227,176,.22);
+  overflow:hidden;
+  border:1px solid rgba(242,227,176,.22);
   background: rgba(10,10,10,.55);
-  box-shadow: 0 24px 70px rgba(0,0,0,.55);
+  box-shadow: var(--shadow);
 }
 
-/* Header de carte : frise répétée */
+/* Header avec frise */
 .romanHeader{
-  padding: 14px 16px;
+  padding:14px 16px;
   display:flex;
-  gap: 12px;
+  gap:12px;
   align-items:center;
   justify-content:space-between;
-  border-bottom: 1px solid rgba(242,227,176,.14);
+  border-bottom:1px solid rgba(242,227,176,.14);
   background:
     linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,0)),
     url("images/motif-grec.png");
-  background-size: 420px auto;
-  background-repeat: repeat;
-  background-position: center;
+  background-size:420px auto;
+  background-repeat:repeat;
+  background-position:center;
 }
 
 /* Tags header */
@@ -140,50 +140,66 @@ h1{
   padding:8px 12px;
   border-radius:999px;
   background: rgba(139,29,29,.22);
-  border: 1px solid rgba(212,180,106,.26);
+  border:1px solid rgba(212,180,106,.26);
   color: rgba(245,241,230,.95);
-  font-weight: 800;
-  font-size: 13px;
+  font-weight:800;
+  font-size:13px;
 }
 
 /* Body */
-.romanBody{
-  padding: 16px;
-}
+.romanBody{ padding:16px; }
 
-/* Photo réelle */
+/* =========================================================
+   PHOTO — FIX PRO portrait/paysage (pas de crop, pas d’étirement)
+   ========================================================= */
 .photoCard{
   border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: rgba(0,0,0,.25);
-}
-.photoCard img{
-  width:100%;
-  height: 240px;
-  object-fit: cover;
-  display:block;
-}
-@media (max-width: 700px){
-  .photoCard img{ height: 190px; }
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at center, rgba(212,180,106,.12), rgba(0,0,0,.52));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px;
+  min-height: 280px;
 }
 
-/* “parchemin” interne : texte d’ambiance */
+/* L'image garde ses proportions */
+.photoCard img{
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:460px;
+  object-fit:contain;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.6);
+}
+
+/* Mobile */
+@media (max-width:700px){
+  .photoCard{ min-height:220px; padding:12px; }
+  .photoCard img{ max-height:320px; }
+}
+
+/* =========================================================
+   “parchemin” interne : texte d’ambiance
+   ========================================================= */
 .storyCard{
-  margin-top: 12px;
-  padding: 14px;
+  margin-top:12px;
+  padding:14px;
   border-radius: var(--radius);
   background: rgba(0,0,0,.22);
-  border: 1px solid var(--line);
+  border:1px solid var(--line);
   color: rgba(245,241,230,.94);
 }
 .storyCard b{ color: var(--gold); }
 
 /* Séparateur doux */
 .hrSoft{
-  height: 1px;
+  height:1px;
   background: rgba(242,227,176,.12);
-  margin: 14px 0;
+  margin:14px 0;
 }
 
 /* Actions row */
@@ -191,10 +207,10 @@ h1{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin-top: 12px;
+  margin-top:12px;
 }
 
-/* Boutons “ghost” */
+/* Boutons ghost */
 .btnGhost{
   display:inline-flex;
   gap:10px;
@@ -206,8 +222,13 @@ h1{
   cursor:pointer;
   color: rgba(245,241,230,.95);
   text-decoration:none;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
 }
-.btnGhost:hover{ border-color: rgba(242,227,176,.32); }
+.btnGhost:hover{
+  border-color: rgba(242,227,176,.32);
+  transform: translateY(-1px);
+  background: rgba(0,0,0,.28);
+}
 
 /* Choix QCM */
 .choiceBtn{
@@ -215,30 +236,31 @@ h1{
   text-align:left;
   padding:14px 14px;
   margin:10px 0;
-  border-radius: 16px;
+  border-radius:16px;
   background: rgba(0,0,0,.28);
-  border: 1px solid var(--line);
+  border:1px solid var(--line);
   color: rgba(245,241,230,.95);
   cursor:pointer;
-  transition: transform .12s ease, border-color .12s ease;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
 }
 .choiceBtn:hover{
   border-color: rgba(242,227,176,.34);
   transform: translateY(-1px);
+  background: rgba(0,0,0,.34);
 }
 
 /* Résultat */
 .resultBox{
-  margin-top: 14px;
-  padding: 14px;
+  margin-top:14px;
+  padding:14px;
   border-radius: var(--radius);
   background: rgba(0,0,0,.18);
-  border: 1px dashed rgba(242,227,176,.22);
+  border:1px dashed rgba(242,227,176,.22);
 }
 .smallPro{
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size:13px;
+  line-height:1.5;
 }
 
 /* Letter badge */
@@ -247,28 +269,24 @@ h1{
   padding:6px 10px;
   border-radius:999px;
   background: rgba(139,29,29,.24);
-  border: 1px solid rgba(212,180,106,.32);
+  border:1px solid rgba(212,180,106,.32);
   color: var(--gold);
-  font-weight: 900;
-  letter-spacing: 1px;
+  font-weight:900;
+  letter-spacing:1px;
 }
 
 /* Inputs */
-input{
-  outline: none;
-}
+input{ outline:none; }
 input[type="text"], input[type="password"], input[type="search"], input:not([type]){
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
+  width:100%;
+  padding:14px;
+  border-radius:14px;
   background: rgba(0,0,0,.22);
-  border: 1px solid var(--line);
+  border:1px solid var(--line);
   color: var(--text);
-  font-size: 16px;
+  font-size:16px;
 }
-input:focus{
-  border-color: rgba(242,227,176,.34);
-}
+input:focus{ border-color: rgba(242,227,176,.34); }
 
 /* Selects */
 select{
@@ -276,60 +294,58 @@ select{
   padding:12px;
   border-radius:12px;
   background: rgba(0,0,0,.22);
-  border: 1px solid var(--line);
+  border:1px solid var(--line);
   color: var(--text);
 }
-select:focus{
-  border-color: rgba(242,227,176,.34);
-}
+select:focus{ border-color: rgba(242,227,176,.34); }
 
 /* =========================================================
    Modal (Infos Izernore)
    ========================================================= */
 .modalBg{
-  position: fixed;
+  position:fixed;
   inset:0;
   background: rgba(0,0,0,.72);
   display:none;
   align-items:center;
   justify-content:center;
-  padding: 18px;
-  z-index: 999;
+  padding:18px;
+  z-index:999;
 }
 .modal{
   width: min(900px, 100%);
   border-radius: var(--radius);
   overflow:hidden;
-  border: 1px solid rgba(242,227,176,.22);
+  border:1px solid rgba(242,227,176,.22);
   background: rgba(12,12,12,.96);
   box-shadow: 0 30px 90px rgba(0,0,0,.7);
 }
 .modalTop{
-  padding: 12px 14px;
+  padding:12px 14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border-bottom: 1px solid rgba(242,227,176,.14);
+  border-bottom:1px solid rgba(242,227,176,.14);
   background:
     linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,0)),
     url("images/motif-grec.png");
-  background-size: 420px auto;
-  background-repeat: repeat;
-  background-position: center;
+  background-size:420px auto;
+  background-repeat:repeat;
+  background-position:center;
 }
 .modalBody{
-  padding: 14px;
+  padding:14px;
   color: rgba(245,241,230,.92);
-  line-height: 1.55;
+  line-height:1.55;
 }
-.modalBody p{ margin: 0 0 10px; }
+.modalBody p{ margin:0 0 10px; }
 .modalClose{
   border:none;
   background: rgba(0,0,0,.25);
   border:1px solid rgba(242,227,176,.18);
   color: rgba(245,241,230,.92);
   padding:8px 10px;
-  border-radius: 12px;
+  border-radius:12px;
   cursor:pointer;
 }
 .modalClose:hover{ border-color: rgba(242,227,176,.35); }
@@ -352,15 +368,15 @@ select:focus{
   100%{ box-shadow: 0 0 0 rgba(212,180,106,0); }
 }
 
-/* ====== ACCUEIL GRID ====== */
-
+/* =========================================================
+   ACCUEIL — GRID BALISES
+   ========================================================= */
 .baliseGrid{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap:16px;
   margin-top:18px;
 }
-
 .baliseCard{
   display:block;
   padding:18px;
@@ -368,27 +384,14 @@ select:focus{
   background: rgba(0,0,0,.35);
   border:1px solid rgba(242,227,176,.15);
   text-decoration:none;
-  color:rgba(245,241,230,.95);
-  transition: all .15s ease;
+  color: rgba(245,241,230,.95);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
 }
-
 .baliseCard:hover{
   transform: translateY(-4px);
   border-color: rgba(242,227,176,.35);
   background: rgba(0,0,0,.45);
 }
-
-.baliseIcon{
-  font-size:26px;
-  margin-bottom:8px;
-}
-
-.baliseTitle{
-  font-weight:800;
-  margin-bottom:6px;
-}
-
-.baliseDesc{
-  font-size:13px;
-  color: rgba(207,199,178,.8);
-}
+.baliseIcon{ font-size:26px; margin-bottom:8px; }
+.baliseTitle{ font-weight:800; margin-bottom:6px; }
+.baliseDesc{ font-size:13px; color: rgba(207,199,178,.8); }
