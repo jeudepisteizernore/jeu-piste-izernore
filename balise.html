@@ -75,79 +75,272 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ================= CONFIG ================= */
 
 const BALISES = {
-  1:{
-    icon:"🦉",
-    title:"Balise I — Avant Rome",
-    subtitle:"Les Séquanes",
-    photo:"images/b1.jpg",
-    story:"Un ancien raconte : prouve que tu connais le peuple gaulois local.",
-    q:"Isarnodurum était au sud du territoire…",
-    type:"mcq",
-    choices:[
-      ["a","des Séquanes"],
-      ["b","des Vikings"],
-      ["c","des Pharaons"]
-    ],
-    answer:"a",
-    reward:"IS",
-    timer:60,
-    hints:["Peuple gaulois régional.","Indice : S…"],
-    infoTitle:"Avant Rome",
-    infoBody:"<p>Izernore existait avant Rome. Le territoire appartenait aux Séquanes.</p>"
-  },
 
-  /* ===== Exemple César ===== */
-  2:{
-    icon:"🛡️",
-    title:"Balise II — Message Secret",
-    subtitle:"Code César",
-    photo:"images/b2.jpg",
-    story:"Décrypte le message du légionnaire.",
-    q:"Décale chaque lettre de 3 vers l’arrière",
-    type:"caesar",
-    cipher:"LQIRV LCHUQRUH",
-    shift:3,
-    answerText:"INFOS IZERNORE",
-    reward:"A",
-    hints:["A devient X si on recule de 3."],
-    infoTitle:"Code César",
-    infoBody:"<p>Le code César est un décalage simple de lettres.</p>"
-  },
+1:{
+icon:"🦉",
+title:"Balise I — Avant Rome",
+subtitle:"Les peuples gaulois",
+photo:"images/b1.jpg",
+story:"Avant l’arrivée des Romains, la région était déjà habitée.",
+q:"Le territoire appartenait à quel peuple gaulois ?",
+type:"mcq",
+choices:[
+["a","Les Séquanes"],
+["b","Les Vikings"],
+["c","Les Égyptiens"]
+],
+answer:"a",
+reward:"I",
+timer:60,
+hints:[
+"Peuple gaulois de l’est de la Gaule.",
+"Ils vivaient vers la Franche-Comté actuelle."
+],
+infoTitle:"Avant la conquête",
+infoBody:`
+<p>Avant l’arrivée des Romains au Ier siècle avant J.-C., la région était occupée par un peuple gaulois : les Séquanes.</p>
+<p>Ils commerçaient, fabriquaient des objets en métal et vivaient dans des villages organisés.</p>
+<p>Des fouilles ont retrouvé des monnaies, des poteries et des objets datant de cette époque.</p>
+`
+},
 
-  /* ===== Exemple Tuiles ===== */
-  3:{
-    icon:"🧩",
-    title:"Balise III — Puzzle",
-    subtitle:"Choisis les bonnes tuiles",
-    photo:"images/b3.jpg",
-    story:"Sélectionne les éléments réels d’une villa romaine.",
-    q:"Clique les bonnes réponses",
-    type:"tiles",
-    tiles:[
-      ["a","Peintures murales",true],
-      ["b","Galerie à colonnes",true],
-      ["c","Garage à dragons",false],
-      ["d","Console romaine",false]
-    ],
-    reward:"R",
-    hints:["Il y a 2 bonnes réponses."],
-    infoTitle:"Villa",
-    infoBody:"<p>Les villas romaines riches avaient peintures et colonnes.</p>"
-  },
+2:{
+icon:"🏛",
+title:"Balise II — Le Vicus",
+subtitle:"Une petite ville gallo-romaine",
+photo:"images/b2.jpg",
+story:"Après la conquête, une petite ville se développe.",
+q:"Comment appelle-t-on une petite ville romaine rurale ?",
+type:"mcq",
+choices:[
+["a","Un vicus"],
+["b","Un château"],
+["c","Une pyramide"]
+],
+answer:"a",
+reward:"S",
+hints:["Mot latin utilisé en Gaule romaine."],
+infoTitle:"Le Vicus",
+infoBody:`
+<p>Un vicus est une petite ville gallo-romaine.</p>
+<p>On y trouvait des maisons, des boutiques et des ateliers.</p>
+<p>Les habitants y vivaient du commerce et de l’artisanat.</p>
+`
+},
 
-  11:{
-    icon:"🏁",
-    title:"Balise XI — Final",
-    subtitle:"Entre le mot secret",
-    photo:"images/b11.jpg",
-    story:"Assemble les lettres.",
-    q:"Entre le mot secret",
-    type:"final",
-    reward:"",
-    hints:["Vérifie l’ordre."],
-    infoTitle:"Fin",
-    infoBody:"<p>Bravo !</p>"
-  }
+3:{
+icon:"🔥",
+title:"Balise III — Les Thermes",
+subtitle:"Les bains romains",
+photo:"images/b3.jpg",
+story:"Les Romains adoraient se laver dans des bains publics.",
+q:"Dans quelle salle l’eau est-elle chaude ?",
+type:"mcq",
+choices:[
+["a","Caldarium"],
+["b","Frigidarium"],
+["c","Atrium"]
+],
+answer:"a",
+reward:"A",
+hints:["Calda signifie chaud."],
+infoTitle:"Les Thermes",
+infoBody:`
+<p>Les thermes étaient des bains publics.</p>
+<p>Ils comportaient plusieurs salles :</p>
+<ul>
+<li>Caldarium : salle chaude</li>
+<li>Tepidarium : salle tiède</li>
+<li>Frigidarium : salle froide</li>
+</ul>
+<p>Ce n’était pas seulement pour se laver, mais aussi pour discuter et se détendre.</p>
+`
+},
+
+4:{
+icon:"🧱",
+title:"Balise IV — Hypocauste",
+subtitle:"Le chauffage romain",
+photo:"images/b4.jpg",
+story:"Les Romains avaient un système ingénieux.",
+q:"L’hypocauste chauffe principalement…",
+type:"mcq",
+choices:[
+["a","Le sol par en dessous"],
+["b","Les toits"],
+["c","L’extérieur"]
+],
+answer:"a",
+reward:"R",
+hints:["HYPO = dessous."],
+infoTitle:"L’Hypocauste",
+infoBody:`
+<p>L’hypocauste est un système de chauffage antique.</p>
+<p>Un foyer produisait de l’air chaud qui circulait sous le sol.</p>
+<p>La chaleur montait ensuite dans les murs.</p>
+<p>C’était très avancé pour l’époque.</p>
+`
+},
+
+5:{
+icon:"🛍",
+title:"Balise V — Le Commerce",
+subtitle:"Vie quotidienne",
+photo:"images/b5.jpg",
+story:"La ville antique était animée.",
+q:"Que trouvait-on le long de la voie principale ?",
+type:"mcq",
+choices:[
+["a","Des boutiques"],
+["b","Des pistes d’atterrissage"],
+["c","Des autoroutes"]
+],
+answer:"a",
+reward:"N",
+hints:["On vendait et fabriquait des objets."],
+infoTitle:"Le Commerce",
+infoBody:`
+<p>Les maisons et boutiques étaient installées le long d’une voie.</p>
+<p>On y vendait des poteries, des outils, des vêtements.</p>
+<p>Des artisans travaillaient le métal et la céramique.</p>
+`
+},
+
+6:{
+icon:"🏺",
+title:"Balise VI — La Villa",
+subtitle:"Habitation riche",
+photo:"images/b6.jpg",
+story:"Certaines familles vivaient dans de grandes villas.",
+q:"Quel élément montre le luxe ?",
+type:"mcq",
+choices:[
+["a","Peintures murales"],
+["b","Garage à dragons"],
+["c","Ascenseur électrique"]
+],
+answer:"a",
+reward:"O",
+hints:["Influence italienne."],
+infoTitle:"La Villa",
+infoBody:`
+<p>Une grande villa découverte dans la région montre un haut niveau de vie.</p>
+<p>On y a retrouvé des peintures murales importées d’Italie.</p>
+<p>Il existait aussi une galerie à colonnes avec vue sur la vallée.</p>
+`
+},
+
+7:{
+icon:"🏛",
+title:"Balise VII — Le Temple",
+subtitle:"Monument antique",
+photo:"images/b7.jpg",
+story:"Un grand temple dominait le paysage.",
+q:"Quelle est la hauteur approximative des piliers conservés ?",
+type:"mcq",
+choices:[
+["a","9 mètres"],
+["b","2 mètres"],
+["c","30 mètres"]
+],
+answer:"a",
+reward:"D",
+hints:["Très impressionnant."],
+infoTitle:"Le Temple",
+infoBody:`
+<p>Le temple gallo-romain est un monument impressionnant.</p>
+<p>Trois piliers d’angle sont encore visibles aujourd’hui.</p>
+<p>Ils mesurent environ 9 mètres de haut.</p>
+<p>Le monument est classé monument historique depuis 1840.</p>
+`
+},
+
+8:{
+icon:"⚔",
+title:"Balise VIII — Le Dieu",
+subtitle:"Mystère antique",
+photo:"images/b8.jpg",
+story:"On ne sait pas exactement quel dieu était honoré.",
+q:"Quel dieu pourrait être lié au nom d’un chemin local ?",
+type:"mcq",
+choices:[
+["a","Mars"],
+["b","Neptune"],
+["c","Apollon"]
+],
+answer:"a",
+reward:"O",
+hints:["Regarde le nom du chemin."],
+infoTitle:"Le Dieu",
+infoBody:`
+<p>Les archéologues pensent que le temple pouvait être dédié à un dieu romain.</p>
+<p>Une inscription évoque Mercure.</p>
+<p>Mais un ancien chemin nommé « vi de mars » fait penser au dieu Mars.</p>
+`
+},
+
+9:{
+icon:"🪨",
+title:"Balise IX — Les Pierres",
+subtitle:"Mémoire du village",
+photo:"images/b9.jpg",
+story:"Les pierres racontent l’histoire.",
+q:"La pierre mouillée correspond à…",
+type:"mcq",
+choices:[
+["a","Un lavoir"],
+["b","Un temple"],
+["c","Une école"]
+],
+answer:"a",
+reward:"R",
+hints:["L’eau…"],
+infoTitle:"Chemin des pierres",
+infoBody:`
+<p>Le parcours du « chemin des pierres » explique différents lieux du village.</p>
+<p>La pierre mouillée correspond au lavoir.</p>
+<p>La pierre sacrée à l’église.</p>
+<p>La pierre ruinée au temple antique.</p>
+`
+},
+
+10:{
+icon:"👑",
+title:"Balise X — Protection",
+subtitle:"Monument historique",
+photo:"images/b10.jpg",
+story:"Un monument est protégé depuis longtemps.",
+q:"Depuis quelle année le temple est-il classé ?",
+type:"mcq",
+choices:[
+["a","1840"],
+["b","1999"],
+["c","2020"]
+],
+answer:"a",
+reward:"U",
+hints:["Première grande liste nationale."],
+infoTitle:"Classement",
+infoBody:`
+<p>Le temple fait partie de la première liste des monuments historiques protégés en France.</p>
+<p>Ce classement date de 1840.</p>
+`
+},
+
+11:{
+icon:"🏁",
+title:"Balise XI — Final",
+subtitle:"Mot secret",
+photo:"images/b11.jpg",
+story:"Assemble toutes les lettres obtenues.",
+q:"Entre le mot secret :",
+type:"final",
+reward:"",
+hints:["Tu as 10 lettres."],
+infoTitle:"Fin",
+infoBody:`<p>Bravo pour ton parcours historique !</p>`
+}
+
 };
 
 /* ================= RENDER ================= */
@@ -309,3 +502,4 @@ function closeInfo(){ document.getElementById("infoBg").style.display="none"; }
 </script>
 </body>
 </html>
+
