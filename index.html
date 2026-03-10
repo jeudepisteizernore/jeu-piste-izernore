@@ -1,204 +1,412 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Code de l’Empire — Jeu de piste</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Izernore | Jeu de piste grandeur nature</title>
+  <meta
+    name="description"
+    content="Mission Izernore est un jeu de piste grandeur nature dans le village avec boucles d'aventure, QR codes, énigmes et mini-jeux."
+  />
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body>
+  <div class="site-bg"></div>
 
-<body class="romanPage">
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">MI</div>
+        <div class="brand-text">
+          <span class="brand-subtitle">Jeu de piste grandeur nature</span>
+          <span class="brand-title">Mission Izernore</span>
+        </div>
+      </a>
 
-<div class="wrap">
+      <nav class="main-nav">
+        <a href="#concept">Concept</a>
+        <a href="#boucles">Boucles</a>
+        <a href="#fonctionnement">Fonctionnement</a>
+        <a href="#finale">Mission finale</a>
+      </nav>
 
-  <!-- HEADER -->
-  <div class="topbar">
-    <div class="brand">
-      <div class="badge">🏛</div>
+      <a href="#boucles" class="btn btn-gold">Commencer</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow">Exploration • Aventure • Mystère local</div>
+
+          <h1>
+            Transforme le village en
+            <span>terrain d’expédition</span>
+          </h1>
+
+          <p class="hero-text">
+            Choisis ta boucle, scanne le premier QR code, résous les énigmes,
+            débloque des mini-jeux et découvre les secrets cachés de
+            <strong>Mission Izernore</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#boucles" class="btn btn-gold">Voir les boucles</a>
+            <a href="#fonctionnement" class="btn btn-stone">Comment jouer</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>4</strong>
+              <span>boucles majeures</span>
+            </div>
+            <div class="stat-card">
+              <strong>30+</strong>
+              <span>étapes & QR codes</span>
+            </div>
+            <div class="stat-card">
+              <strong>1</strong>
+              <span>mission finale secrète</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="mission-card">
+            <div class="mission-card-top">
+              <span class="badge badge-gold">Mission active</span>
+              <span class="badge badge-green">Explorateur</span>
+            </div>
+
+            <h2>La Route des Veilleurs</h2>
+            <p class="mission-subtitle">Boucle découverte • Izernore → Pérignat</p>
+
+            <div class="mission-meta">
+              <div>
+                <span class="meta-label">Distance</span>
+                <strong>7 km</strong>
+              </div>
+              <div>
+                <span class="meta-label">Durée</span>
+                <strong>1h45 – 2h15</strong>
+              </div>
+              <div>
+                <span class="meta-label">Niveau</span>
+                <strong>Facile</strong>
+              </div>
+            </div>
+
+            <p class="mission-description">
+              Les Veilleurs ont disséminé des symboles à travers le village.
+              À toi de retrouver leurs traces et de déverrouiller le premier
+              itinéraire de Mission Izernore.
+            </p>
+
+            <div class="mission-card-actions">
+              <a href="boucles/veilleurs.html" class="btn btn-gold">Entrer dans la mission</a>
+              <button type="button" class="btn btn-outline" id="openIntroBtn">
+                Voir le briefing
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section id="concept" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">Le concept</span>
+          <h2>Un vrai site d’aventure, pas une simple page d’infos</h2>
+          <p>
+            Mission Izernore mélange parcours en extérieur, QR codes,
+            mini-jeux et narration immersive pour créer une expérience
+            complète dans le village.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">🧭</div>
+            <h3>Exploration sur le terrain</h3>
+            <p>
+              Chaque boucle t’emmène dans une zone précise avec une ambiance,
+              une histoire et des épreuves adaptées.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Départ par QR code</h3>
+            <p>
+              Les joueurs lancent leur mission directement depuis leur
+              téléphone, sans application compliquée.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🗝️</div>
+            <h3>Énigmes et mini-jeux</h3>
+            <p>
+              Cadenas, codes secrets, puzzles, mémoire, décryptage et
+              validations progressives.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Récompense finale</h3>
+            <p>
+              Chaque mission terminée rapproche les joueurs de l’expédition
+              ultime et du badge final.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOUCLES -->
+    <section id="boucles" class="section section-dark">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">Les boucles</span>
+          <h2>Choisis ton itinéraire d’expédition</h2>
+          <p>
+            Chaque boucle possède son propre style, sa distance, sa difficulté
+            et son univers.
+          </p>
+        </div>
+
+        <div class="loops-grid">
+          <article class="loop-card">
+            <div class="loop-top">
+              <span class="loop-icon">🌿</span>
+              <span class="difficulty easy">Facile</span>
+            </div>
+            <h3>La Route des Veilleurs</h3>
+            <p class="loop-subtitle">Izernore → Pérignat</p>
+            <p>
+              Une boucle accessible pour découvrir les premières traces
+              laissées par les Veilleurs.
+            </p>
+            <ul class="loop-infos">
+              <li><strong>Distance :</strong> 7 km</li>
+              <li><strong>Durée :</strong> 1h45 – 2h15</li>
+              <li><strong>Ambiance :</strong> découverte & symboles</li>
+            </ul>
+            <a href="boucles/veilleurs.html" class="btn btn-stone full">Voir la mission</a>
+          </article>
+
+          <article class="loop-card">
+            <div class="loop-top">
+              <span class="loop-icon">🌊</span>
+              <span class="difficulty medium">Intermédiaire</span>
+            </div>
+            <h3>Le Barrage des Ombres</h3>
+            <p class="loop-subtitle">Inria • Barrage • Val d’Enfer</p>
+            <p>
+              Un parcours plus tactique où les joueurs doivent relier balises,
+              indices et passages cachés.
+            </p>
+            <ul class="loop-infos">
+              <li><strong>Distance :</strong> 11 km</li>
+              <li><strong>Durée :</strong> 2h45 – 3h30</li>
+              <li><strong>Ambiance :</strong> orientation & mystère</li>
+            </ul>
+            <a href="boucles/barrage-ombres.html" class="btn btn-stone full">Voir la mission</a>
+          </article>
+
+          <article class="loop-card">
+            <div class="loop-top">
+              <span class="loop-icon">📜</span>
+              <span class="difficulty medium">Intermédiaire</span>
+            </div>
+            <h3>Le Dossier de Condamine</h3>
+            <p class="loop-subtitle">Vöerle • Condamine</p>
+            <p>
+              Une enquête immersive entre traces anciennes, archives perdues
+              et messages cryptés.
+            </p>
+            <ul class="loop-infos">
+              <li><strong>Distance :</strong> 9 km</li>
+              <li><strong>Durée :</strong> 2h15 – 2h45</li>
+              <li><strong>Ambiance :</strong> enquête & archives</li>
+            </ul>
+            <a href="boucles/dossier-condamine.html" class="btn btn-stone full">Voir la mission</a>
+          </article>
+
+          <article class="loop-card">
+            <div class="loop-top">
+              <span class="loop-icon">🪨</span>
+              <span class="difficulty hard">Sportive</span>
+            </div>
+            <h3>La Pierre des Titans</h3>
+            <p class="loop-subtitle">Ceyssiat • Pierre Buveuse</p>
+            <p>
+              Une mission plus engagée menant vers la relique finale du
+              territoire.
+            </p>
+            <ul class="loop-infos">
+              <li><strong>Distance :</strong> 13 km</li>
+              <li><strong>Durée :</strong> 3h30 – 4h15</li>
+              <li><strong>Ambiance :</strong> légende & endurance</li>
+            </ul>
+            <a href="boucles/pierre-titans.html" class="btn btn-stone full">Voir la mission</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FONCTIONNEMENT -->
+    <section id="fonctionnement" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">Fonctionnement</span>
+          <h2>Comment jouer à Mission Izernore</h2>
+          <p>
+            Le principe est simple : tout est pensé pour fonctionner
+            rapidement sur téléphone pendant la marche.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number">01</span>
+            <h3>Choisir une boucle</h3>
+            <p>
+              Le joueur sélectionne son parcours selon son niveau, le temps
+              disponible et l’ambiance recherchée.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">02</span>
+            <h3>Scanner le QR de départ</h3>
+            <p>
+              Le premier QR code ouvre directement la mission et le briefing
+              d’expédition.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">03</span>
+            <h3>Résoudre les énigmes</h3>
+            <p>
+              Chaque étape débloque l’indice suivant grâce à une réponse, un
+              code, un puzzle ou une observation.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">04</span>
+            <h3>Terminer la mission</h3>
+            <p>
+              À la fin, le joueur obtient une conclusion, un badge et peut
+              continuer vers d’autres boucles.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI JEUX -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">Mécaniques de jeu</span>
+          <h2>Des mini-jeux réutilisables dans toutes les missions</h2>
+          <p>
+            La force du projet est là : une base de jeux simple, propre et
+            réutilisable sur toutes les boucles du village.
+          </p>
+        </div>
+
+        <div class="games-list">
+          <div class="game-pill">Cadenas à code</div>
+          <div class="game-pill">Puzzle visuel</div>
+          <div class="game-pill">Quiz chronométré</div>
+          <div class="game-pill">Décryptage</div>
+          <div class="game-pill">Objets cachés</div>
+          <div class="game-pill">Mémoire de symboles</div>
+          <div class="game-pill">Ordre des balises</div>
+          <div class="game-pill">Carte d’orientation</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION FINALE -->
+    <section id="finale" class="section final-section">
+      <div class="container final-grid">
+        <div>
+          <span class="section-tag">Mission ultime</span>
+          <h2>L’Expédition Ultime</h2>
+          <p>
+            Une fois les 4 boucles terminées, les joueurs peuvent débloquer la
+            mission finale reliant tous les itinéraires dans une aventure
+            complète à travers Izernore.
+          </p>
+
+          <ul class="final-list">
+            <li>Départ secret</li>
+            <li>Énigmes plus rares</li>
+            <li>Balises premium</li>
+            <li>Badge final des Titans</li>
+          </ul>
+        </div>
+
+        <div class="final-card">
+          <div class="final-card-inner">
+            <span class="badge badge-gold">Finale verrouillée</span>
+            <h3>Accès réservé aux explorateurs confirmés</h3>
+            <p>
+              Termine les grandes boucles pour révéler l’emplacement du point
+              de départ final.
+            </p>
+            <a href="#" class="btn btn-gold disabled-link">Bientôt disponible</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
       <div>
-        <h1>LE CODE DE L’EMPIRE</h1>
-        <div class="subtitle">
-          Jeu de piste – Antiquité romaine (Izernore) • 7–10 ans
-        </div>
+        <strong>Mission Izernore</strong>
+        <p>Jeu de piste grandeur nature dans le village.</p>
       </div>
+
+      <div class="footer-links">
+        <a href="#">Mentions</a>
+        <a href="#">Règlement</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL BRIEFING -->
+  <div class="modal" id="introModal" aria-hidden="true">
+    <div class="modal-overlay" id="closeIntroOverlay"></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+      <button class="modal-close" id="closeIntroBtn" aria-label="Fermer">×</button>
+      <span class="section-tag">Briefing</span>
+      <h2 id="introTitle">Bienvenue dans Mission Izernore</h2>
+      <p>
+        Des traces anciennes ont été repérées dans plusieurs zones du village.
+        Ton objectif : explorer, observer, résoudre et progresser d’étape en
+        étape jusqu’à débloquer les secrets d’Izernore.
+      </p>
+      <p>
+        Munis-toi d’un téléphone, d’un bon sens de l’observation et d’un esprit
+        d’équipe. Les QR codes seront tes portes d’entrée vers les missions.
+      </p>
+      <a href="#boucles" class="btn btn-gold" id="modalStartBtn">Choisir une boucle</a>
     </div>
   </div>
 
-  <div class="romanFrame">
-
-    <div class="romanHeader">
-      <div class="romanTag">⚔ Mission : retrouver le mot secret</div>
-      <div class="romanTag">👨‍👩‍👧‍👦 Parcours Famille</div>
-    </div>
-
-    <div class="romanBody">
-
-      <!-- PROGRESSION -->
-      <div class="storyCard" style="margin-bottom:18px">
-        🏆 Progression : 
-        <b><span id="progressText">0 / 11</span></b>
-        <div style="margin-top:10px;height:10px;background:rgba(0,0,0,.3);border-radius:20px;overflow:hidden">
-          <div id="progressBar" style="height:100%;width:0%;background:linear-gradient(90deg,gold,orange)"></div>
-        </div>
-      </div>
-
-      <div class="storyCard">
-        À chaque balise, réussis l’épreuve et récupère une lettre.
-        À la fin du parcours, assemble-les pour découvrir le mot secret.
-        <br><br>
-        <b>Règle :</b> ne dis pas le mot final à voix haute avant la fin 😏
-      </div>
-
-      <div class="hrSoft"></div>
-
-      <div class="progressWrap">
-  <div class="progressBar">
-    <div class="progressFill" id="progressFill"></div>
-  </div>
-  <div style="margin-top:6px;font-size:13px;color:#f2e3b0;font-weight:700">
-    Progression : <span id="progressText">0%</span>
-  </div>
-</div>
-
-      <!-- GRID BALISES -->
-      <div class="baliseGrid">
-
-        <a href="balise.html?b=1" class="baliseCard" data-id="1"><div class="baliseIcon">🦉</div><div class="baliseTitle">Balise I — Avant Rome</div><div class="baliseDesc">Les Séquanes & la Gaule</div></a>
-
-        <a href="balise.html?b=2" class="baliseCard" data-id="2"><div class="baliseIcon">🏛</div><div class="baliseTitle">Balise II — Le Vicus</div><div class="baliseDesc">Vie dans la bourgade</div></a>
-
-        <a href="balise.html?b=3" class="baliseCard" data-id="3"><div class="baliseIcon">🔥</div><div class="baliseTitle">Balise III — Les Thermes</div><div class="baliseDesc">Chaud / tiède / froid</div></a>
-
-        <a href="balise.html?b=4" class="baliseCard" data-id="4"><div class="baliseIcon">🧱</div><div class="baliseTitle">Balise IV — Hypocauste</div><div class="baliseDesc">Chauffage romain</div></a>
-
-        <a href="balise.html?b=5" class="baliseCard" data-id="5"><div class="baliseIcon">🛍</div><div class="baliseTitle">Balise V — Le Marché</div><div class="baliseDesc">Boutiques & artisanat</div></a>
-
-        <a href="balise.html?b=6" class="baliseCard" data-id="6"><div class="baliseIcon">🏺</div><div class="baliseTitle">Balise VI — La Villa</div><div class="baliseDesc">Pérignat : haut niveau de vie</div></a>
-
-        <a href="balise.html?b=7" class="baliseCard" data-id="7"><div class="baliseIcon">🏛</div><div class="baliseTitle">Balise VII — Le Temple</div><div class="baliseDesc">Colonnes & mystère</div></a>
-
-        <a href="balise.html?b=8" class="baliseCard" data-id="8"><div class="baliseIcon">⚔</div><div class="baliseTitle">Balise VIII — Mars ou Mercure ?</div><div class="baliseDesc">Le dieu honoré</div></a>
-
-        <a href="balise.html?b=9" class="baliseCard" data-id="9"><div class="baliseIcon">🪨</div><div class="baliseTitle">Balise IX — Chemin des Pierres</div><div class="baliseDesc">Associer pierres & lieux</div></a>
-
-        <a href="balise.html?b=10" class="baliseCard" data-id="10"><div class="baliseIcon">👑</div><div class="baliseTitle">Balise X — L’Empereur</div><div class="baliseDesc">Dernière lettre</div></a>
-
-        <a href="balise.html?b=11" class="baliseCard" data-id="11"><div class="baliseIcon">🏁</div><div class="baliseTitle">Balise XI — Validation finale</div><div class="baliseDesc">Entrer le mot secret</div></a>
-
-      </div>
-
-      <div style="margin-top:25px;text-align:center">
-        <div class="btnGhost" onclick="resetGame()">🔄 Réinitialiser le jeu</div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<script>
-// ---- PROGRESSION ----
-const done = JSON.parse(localStorage.getItem("doneBalises") || "[]");
-const total = 11;
-
-document.getElementById("progressText").textContent = done.length + " / " + total;
-document.getElementById("progressBar").style.width = (done.length/total*100) + "%";
-
-// ---- BALISES VALIDÉES EN DORÉ ----
-document.querySelectorAll(".baliseCard").forEach(card=>{
-  const id = parseInt(card.dataset.id);
-  if(done.includes(id)){
-    card.style.border="2px solid gold";
-    card.style.boxShadow="0 0 20px rgba(212,180,106,.7)";
-  }
-});
-
-// ---- RESET ----
-function resetGame(){
-  if(confirm("Réinitialiser toute la progression ?")){
-    localStorage.removeItem("doneBalises");
-    location.reload();
-  }
-}
-</script>
-
-  <script src="game.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-  const cards = document.querySelectorAll(".baliseCard");
-
-  cards.forEach(card=>{
-    const url = card.getAttribute("href");
-    const match = url.match(/b=(\d+)/);
-    if(!match) return;
-
-    const num = parseInt(match[1],10);
-
-    if(isDone(num)){
-      card.classList.add("done");
-      card.innerHTML += "<div style='margin-top:8px;font-size:12px;color:#f2e3b0;font-weight:900'>✔ Validée</div>";
-    }
-  });
-
-});
-</script>
-
-  <script src="game.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-  const totalBalises = 11;
-  let doneCount = 0;
-
-  const cards = document.querySelectorAll(".baliseCard");
-
-  cards.forEach(card=>{
-    const url = card.getAttribute("href");
-    const match = url.match(/b=(\d+)/);
-    if(!match) return;
-
-    const num = parseInt(match[1],10);
-
-    if(isDone(num)){
-      card.classList.add("done");
-      doneCount++;
-    }
-  });
-
-  /* ===== PROGRESSION ===== */
-  const percent = Math.round((doneCount / totalBalises) * 100);
-  document.getElementById("progressFill").style.width = percent + "%";
-  document.getElementById("progressText").textContent = percent + "%";
-
-  /* ===== VERROUILLAGE ORDRE ===== */
-  let maxUnlocked = doneCount + 1;
-
-  cards.forEach(card=>{
-    const url = card.getAttribute("href");
-    const match = url.match(/b=(\d+)/);
-    if(!match) return;
-    const num = parseInt(match[1],10);
-
-    if(num > maxUnlocked){
-      card.classList.add("locked");
-    }
-  });
-
-  /* ===== BADGE FINAL ===== */
-  if(doneCount === totalBalises){
-    const badge = document.createElement("div");
-    badge.className = "finalBadge";
-    badge.innerHTML = "🎖 Explorateur Romain — Mission accomplie !";
-    document.querySelector(".wrap").appendChild(badge);
-  }
-
-});
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
