@@ -1,29 +1,90 @@
-// game.js — sons + helpers + animations
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
 
-const SFX = {
-  click: new Audio("audio/click.mp3"),
-  ok: new Audio("audio/ok.mp3"),
-  bad: new Audio("audio/bad.mp3"),
-};
+  const introModal = document.getElementById("introModal");
+  const openIntroBtn = document.getElementById("openIntroBtn");
+  const closeIntroBtn = document.getElementById("closeIntroBtn");
+  const closeIntroOverlay = document.getElementById("closeIntroOverlay");
+  const modalStartBtn = document.getElementById("modalStartBtn");
 
-function play(name){
-  try{
-    const a = SFX[name].cloneNode();
-    a.volume = (name === "click") ? 0.55 : 0.75;
-    a.play();
-  }catch(e){}
-}
+  function openModal() {
+    if (!introModal) return;
+    introModal.classList.add("active");
+    introModal.setAttribute("aria-hidden", "false");
+    body.classList.add("modal-open");
+  }
 
-function $(id){ return document.getElementById(id); }
+  function closeModal() {
+    if (!introModal) return;
+    introModal.classList.remove("active");
+    introModal.setAttribute("aria-hidden", "true");
+    body.classList.remove("modal-open");
+  }
 
-function setDone(n){ localStorage.setItem("balise_"+n, "ok"); }
-function isDone(n){ return localStorage.getItem("balise_"+n) === "ok"; }
+  if (openIntroBtn) {
+    openIntroBtn.addEventListener("click", openModal);
+  }
 
-function shake(el){
-  if(!el) return;
-  el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
-}
-function glow(el){
-  if(!el) return;
-  el.classList.remove("glow"); void el.offsetWidth; el.classList.add("glow");
-}
+  if (closeIntroBtn) {
+    closeIntroBtn.addEventListener("click", closeModal);
+  }
+
+  if (closeIntroOverlay) {
+    closeIntroOverlay.addEventListener("click", closeModal);
+  }
+
+  if (modalStartBtn) {
+    modalStartBtn.addEventListener("click", closeModal);
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && introModal && introModal.classList.contains("active")) {
+      closeModal();
+    }
+  });
+
+  const navLinks = document.querySelectorAll('a[href^="#"]');
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const targetElement = document.querySelector(targetId);
+
+      if (targetElement) {
+        e.preventDefault();
+        closeModal();
+
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+
+  const animatedCards = document.querySelectorAll(
+    ".feature-card, .loop-card, .step-card, .stat-card, .game-pill, .final-card"
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+    }
+  );
+
+  animatedCards.forEach((card) => {
+    card.classList.add("reveal");
+    observer.observe(card);
+  });
+});
