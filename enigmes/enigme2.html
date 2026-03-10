@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Énigme 2 | Mission Izernore</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="../index.html" class="brand">
+        <div class="brand-logo">MI</div>
+        <div class="brand-text">
+          <span class="brand-subtitle">Mission Izernore</span>
+          <span class="brand-title">Énigme 2 • La Route des Veilleurs</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../Boucles/veilleurs.html">Mission</a>
+      </nav>
+
+      <a href="../Boucles/veilleurs.html" class="btn btn-stone">Retour mission</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="eyebrow">Étape 2 • Observation du terrain</div>
+
+          <h1>
+            Lis les traces
+            <span>du lieu</span>
+          </h1>
+
+          <p class="hero-text">
+            Les Veilleurs ne cachaient pas tous leurs secrets dans des chiffres.
+            Certains messages étaient laissés dans les formes, les mots et les
+            éléments qui servaient à guider les voyageurs. Observe bien autour de toi,
+            puis trouve le bon mot pour poursuivre la mission.
+          </p>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>02</strong>
+              <span>deuxième énigme</span>
+            </div>
+            <div class="stat-card">
+              <strong>1</strong>
+              <span>mot à trouver</span>
+            </div>
+            <div class="stat-card">
+              <strong>1</strong>
+              <span>indice terrain</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="mission-card">
+            <div class="mission-card-top">
+              <span class="badge badge-gold">Observation</span>
+              <span class="badge badge-green">Réponse texte</span>
+            </div>
+
+            <h2>Énigme du Veilleur</h2>
+
+            <p class="mission-description">
+              “Je suis là depuis bien avant toi.  
+              On me lit, on me suit, parfois on m’ignore.  
+              Pourtant sans moi, impossible de savoir où aller.”
+            </p>
+
+            <div class="riddle-box">
+              <h3>Question</h3>
+              <p>
+                Quel est le mot que désigne cette énigme ?
+              </p>
+            </div>
+
+            <div class="answer-block">
+              <label for="textAnswer" class="answer-label">Ta réponse</label>
+              <input
+                type="text"
+                id="textAnswer"
+                class="text-answer-input"
+                placeholder="Entre le mot trouvé"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="mission-card-actions">
+              <button id="checkAnswerBtn" class="btn btn-gold">Valider la réponse</button>
+              <button id="hintBtn2" class="btn btn-outline">Afficher un indice</button>
+            </div>
+
+            <div id="messageBox2" class="enigme-message"></div>
+
+            <div id="hintBox2" class="hint-box hidden">
+              Cherche un élément qui sert à guider, orienter ou confirmer une direction
+              sur le parcours. Ce n’est pas un lieu, mais un repère.
+            </div>
+
+            <div id="resultBox2" class="next-step-box hidden">
+              <h3>Réponse validée</h3>
+              <p>
+                Tu as compris le deuxième message des Veilleurs.
+              </p>
+
+              <div class="clue-reward">
+                <div class="reward-badge">Lettre gagnée : Z</div>
+                <p>
+                  <strong>Indice pour la prochaine balise :</strong>
+                  cherche un endroit où l’on observe, traverse ou longe un passage
+                  clairement marqué dans le parcours.
+                </p>
+              </div>
+            </div>
+
+            <div class="info-plus-box">
+              <h3>Infos +</h3>
+              <p>
+                Cet encart pourra accueillir une archive locale, une anecdote
+                patrimoniale, une explication sur le cheminement du lieu ou toute
+                information historique liée à cette étape précise du tracé.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const acceptedAnswers = ["balise", "une balise"];
+
+    const textAnswer = document.getElementById("textAnswer");
+    const checkAnswerBtn = document.getElementById("checkAnswerBtn");
+    const hintBtn2 = document.getElementById("hintBtn2");
+    const hintBox2 = document.getElementById("hintBox2");
+    const messageBox2 = document.getElementById("messageBox2");
+    const resultBox2 = document.getElementById("resultBox2");
+
+    function normalizeText(value) {
+      return value
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ");
+    }
+
+    function validateAnswer() {
+      const userAnswer = normalizeText(textAnswer.value);
+
+      if (!userAnswer) {
+        messageBox2.textContent = "Entre une réponse avant de valider.";
+        messageBox2.className = "enigme-message error";
+        resultBox2.classList.add("hidden");
+        return;
+      }
+
+      const isCorrect = acceptedAnswers.includes(userAnswer);
+
+      if (isCorrect) {
+        messageBox2.textContent = "Bonne réponse. Le deuxième message est déchiffré.";
+        messageBox2.className = "enigme-message success";
+        resultBox2.classList.remove("hidden");
+      } else {
+        messageBox2.textContent = "Ce n’est pas la bonne réponse. Observe mieux le lieu et relis l’énigme.";
+        messageBox2.className = "enigme-message error";
+        resultBox2.classList.add("hidden");
+      }
+    }
+
+    checkAnswerBtn.addEventListener("click", validateAnswer);
+
+    textAnswer.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        validateAnswer();
+      }
+    });
+
+    hintBtn2.addEventListener("click", () => {
+      hintBox2.classList.toggle("hidden");
+    });
+  </script>
+
+</body>
+</html>
